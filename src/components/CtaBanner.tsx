@@ -1,4 +1,5 @@
 import ctaBg from "@/assets/cta-bg.jpg";
+import ScrollReveal from "./ScrollReveal";
 
 const CtaBanner = () => (
   <section className="relative py-20 md:py-28 overflow-hidden">

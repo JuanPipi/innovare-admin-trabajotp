@@ -1,3 +1,4 @@
+import ScrollReveal from "./ScrollReveal";
 import {
   Search,
   Target,

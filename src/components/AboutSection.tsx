@@ -1,4 +1,5 @@
 import { Eye, Lightbulb, Settings } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 const values = [
   {

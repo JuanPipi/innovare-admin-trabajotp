@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MapPin, Mail, Phone, Globe } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 const ContactSection = () => {
   const [form, setForm] = useState({ nombre: "", empresa: "", email: "", mensaje: "" });

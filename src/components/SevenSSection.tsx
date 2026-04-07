@@ -1,3 +1,4 @@
+import ScrollReveal from "./ScrollReveal";
 import {
   Compass,
   Building2,

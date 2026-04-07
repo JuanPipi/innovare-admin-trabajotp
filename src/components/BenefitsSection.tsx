@@ -1,4 +1,5 @@
 import { BarChart3, UserCheck, Sparkles, Target } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 const benefits = [
   {

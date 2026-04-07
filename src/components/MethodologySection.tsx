@@ -1,4 +1,5 @@
 import { ClipboardList, Stethoscope, FileCheck, Rocket } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 const steps = [
   {
