@@ -1,5 +1,15 @@
 import { Linkedin, Instagram, Twitter } from "lucide-react";
 
+const socialLinks = [
+  { Icon: Linkedin, href: "#", label: "LinkedIn" },
+  {
+    Icon: Instagram,
+    href: "https://www.instagram.com/consultora_innovare?igsh=MWV1NTV3OTJoNGw4Ng==",
+    label: "Instagram",
+  },
+  { Icon: Twitter, href: "#", label: "X / Twitter" },
+];
+
 const Footer = () => (
   <footer className="bg-navy text-primary-foreground">
     <div className="container mx-auto px-4 lg:px-8 py-16">
@@ -46,10 +56,13 @@ const Footer = () => (
             Seguinos
           </h4>
           <div className="flex gap-3">
-            {[Linkedin, Instagram, Twitter].map((Icon, i) => (
+            {socialLinks.map(({ Icon, href, label }, i) => (
               <a
                 key={i}
-                href="#"
+                href={href}
+                aria-label={label}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noreferrer" : undefined}
                 className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center hover:bg-blue-accent transition-colors"
               >
                 <Icon size={18} />
