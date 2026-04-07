@@ -1,4 +1,5 @@
 import ctaBg from "@/assets/cta-bg.jpg";
+import ScrollReveal from "./ScrollReveal";
 
 const CtaBanner = () => (
   <section className="relative py-20 md:py-28 overflow-hidden">
@@ -6,6 +7,7 @@ const CtaBanner = () => (
       <img src={ctaBg} alt="" className="w-full h-full object-cover" />
       <div className="absolute inset-0 bg-hero opacity-90" />
     </div>
+    <ScrollReveal>
     <div className="relative container mx-auto px-4 lg:px-8 text-center">
       <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6 max-w-3xl mx-auto leading-tight">
         Impulsá el crecimiento de tu organización con una consultoría estratégica
@@ -21,6 +23,7 @@ const CtaBanner = () => (
         Hablemos
       </a>
     </div>
+    </ScrollReveal>
   </section>
 );
 
