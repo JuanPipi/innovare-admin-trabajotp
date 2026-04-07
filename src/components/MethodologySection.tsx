@@ -31,24 +31,27 @@ const steps = [
 const MethodologySection = () => (
   <section id="metodologia" className="py-24 md:py-32 bg-background">
     <div className="container mx-auto px-4 lg:px-8">
-      <div className="max-w-3xl mx-auto text-center mb-16">
-        <p className="text-blue-accent text-sm font-semibold tracking-widest uppercase mb-3">
-          Metodología
-        </p>
-        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-          Nuestro proceso de trabajo
-        </h2>
-        <p className="text-muted-foreground text-lg">
-          Un enfoque estructurado y probado que garantiza resultados en cada
-          etapa del proyecto.
-        </p>
-      </div>
+      <ScrollReveal>
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <p className="text-blue-accent text-sm font-semibold tracking-widest uppercase mb-3">
+            Metodología
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
+            Nuestro proceso de trabajo
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            Un enfoque estructurado y probado que garantiza resultados en cada
+            etapa del proyecto.
+          </p>
+        </div>
+      </ScrollReveal>
 
       <div className="grid md:grid-cols-4 gap-6 relative">
         {/* Connector line (desktop) */}
         <div className="hidden md:block absolute top-[4.5rem] left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-blue-accent/20 via-blue-accent/40 to-blue-accent/20" />
 
-        {steps.map((s) => (
+        {steps.map((s, i) => (
+          <ScrollReveal key={s.num} delay={i * 150}>
           <div key={s.num} className="relative flex flex-col items-center text-center">
             {/* Number circle */}
             <div className="relative z-10 w-20 h-20 rounded-full bg-card border-2 border-blue-accent/30 flex items-center justify-center mb-6 shadow-card">
@@ -66,6 +69,7 @@ const MethodologySection = () => (
               {s.desc}
             </p>
           </div>
+          </ScrollReveal>
         ))}
       </div>
     </div>
