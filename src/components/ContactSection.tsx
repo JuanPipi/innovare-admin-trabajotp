@@ -14,19 +14,22 @@ const ContactSection = () => {
   return (
     <section id="contacto" className="py-24 md:py-32 bg-muted/50">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <p className="text-blue-accent text-sm font-semibold tracking-widest uppercase mb-3">
-            Contacto
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-            Conversemos sobre tu proyecto
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Completá el formulario y un consultor se pondrá en contacto con vos
-            en las próximas 24 horas.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <p className="text-blue-accent text-sm font-semibold tracking-widest uppercase mb-3">
+              Contacto
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
+              Conversemos sobre tu proyecto
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Completá el formulario y un consultor se pondrá en contacto con vos
+              en las próximas 24 horas.
+            </p>
+          </div>
+        </ScrollReveal>
 
+        <ScrollReveal delay={100}>
         <div className="grid lg:grid-cols-5 gap-10 max-w-5xl mx-auto">
           {/* Form */}
           <form
