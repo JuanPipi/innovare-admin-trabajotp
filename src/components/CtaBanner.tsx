@@ -23,6 +23,7 @@ const CtaBanner = () => (
         Hablemos
       </a>
     </div>
+    </ScrollReveal>
   </section>
 );
 
