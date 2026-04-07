@@ -44,22 +44,25 @@ const services = [
 const ServicesSection = () => (
   <section id="servicios" className="py-24 md:py-32 bg-muted/50">
     <div className="container mx-auto px-4 lg:px-8">
-      <div className="max-w-3xl mx-auto text-center mb-16">
-        <p className="text-blue-accent text-sm font-semibold tracking-widest uppercase mb-3">
-          Nuestros servicios
-        </p>
-        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-          Soluciones integrales para tu organización
-        </h2>
-        <p className="text-muted-foreground text-lg">
-          Ofrecemos un portfolio completo de servicios de consultoría diseñados
-          para abordar los desafíos organizacionales desde múltiples
-          perspectivas.
-        </p>
-      </div>
+      <ScrollReveal>
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <p className="text-blue-accent text-sm font-semibold tracking-widest uppercase mb-3">
+            Nuestros servicios
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
+            Soluciones integrales para tu organización
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            Ofrecemos un portfolio completo de servicios de consultoría diseñados
+            para abordar los desafíos organizacionales desde múltiples
+            perspectivas.
+          </p>
+        </div>
+      </ScrollReveal>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {services.map((s) => (
+        {services.map((s, i) => (
+          <ScrollReveal key={s.title} delay={i * 100}>
           <div
             key={s.title}
             className="group bg-card rounded-xl p-7 shadow-card hover:shadow-card-hover transition-all duration-300 border border-border hover:border-blue-accent/30 hover:-translate-y-1"
@@ -74,6 +77,7 @@ const ServicesSection = () => (
               {s.desc}
             </p>
           </div>
+          </ScrollReveal>
         ))}
       </div>
     </div>
