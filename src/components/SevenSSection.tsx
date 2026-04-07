@@ -22,22 +22,25 @@ const elements = [
 const SevenSSection = () => (
   <section className="py-24 md:py-32 bg-muted/50">
     <div className="container mx-auto px-4 lg:px-8">
-      <div className="max-w-3xl mx-auto text-center mb-16">
-        <p className="text-blue-accent text-sm font-semibold tracking-widest uppercase mb-3">
-          Enfoque integral
-        </p>
-        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-          Las 7 dimensiones de la gestión
-        </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Trabajamos con una mirada sistémica que abarca las siete dimensiones
-          clave de toda organización, asegurando coherencia y alineación en cada
-          intervención.
-        </p>
-      </div>
+      <ScrollReveal>
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <p className="text-blue-accent text-sm font-semibold tracking-widest uppercase mb-3">
+            Enfoque integral
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
+            Las 7 dimensiones de la gestión
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Trabajamos con una mirada sistémica que abarca las siete dimensiones
+            clave de toda organización, asegurando coherencia y alineación en cada
+            intervención.
+          </p>
+        </div>
+      </ScrollReveal>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4">
-        {elements.map((e) => (
+        {elements.map((e, i) => (
+          <ScrollReveal key={e.label} delay={i * 80}>
           <div
             key={e.label}
             className="group flex flex-col items-center text-center bg-card rounded-xl p-5 shadow-card hover:shadow-card-hover border border-border hover:border-blue-accent/30 transition-all duration-300"
@@ -55,6 +58,7 @@ const SevenSSection = () => (
               {e.desc}
             </p>
           </div>
+          </ScrollReveal>
         ))}
       </div>
     </div>
