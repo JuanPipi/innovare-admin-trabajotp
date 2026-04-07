@@ -1,10 +1,4 @@
-import { useRef, useEffect, useState, type JSX } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText as GSAPSplitText } from "gsap/SplitText";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type JSX } from "react";
 
 type SplitTextProps = {
   text: string;
@@ -13,8 +7,8 @@ type SplitTextProps = {
   duration?: number;
   ease?: string;
   splitType?: string;
-  from?: gsap.TweenVars;
-  to?: gsap.TweenVars;
+  from?: CSSProperties;
+  to?: CSSProperties;
   threshold?: number;
   rootMargin?: string;
   textAlign?: "left" | "center" | "right";
@@ -26,153 +20,74 @@ const SplitText = ({
   text,
   className = "",
   delay = 50,
-  duration = 1.25,
-  ease = "power3.out",
+  duration = 0.8,
+  ease = "cubic-bezier(0.22, 1, 0.36, 1)",
   splitType = "chars",
-  from = { opacity: 0, y: 40 },
-  to = { opacity: 1, y: 0 },
-  threshold = 0.1,
-  rootMargin = "-100px",
+  from = { opacity: 0, transform: "translateY(20px)" },
+  to = { opacity: 1, transform: "translateY(0)" },
+  threshold = 0.15,
+  rootMargin = "0px",
   textAlign = "center",
   tag = "p",
   onLetterAnimationComplete,
 }: SplitTextProps) => {
   const ref = useRef<HTMLElement | null>(null);
-  const animationCompletedRef = useRef(false);
-  const onCompleteRef = useRef(onLetterAnimationComplete);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [inView, setInView] = useState(false);
+
+  const tokens = useMemo(() => {
+    if (splitType.includes("words")) {
+      return text.split(" ").map((word, idx, arr) => `${word}${idx < arr.length - 1 ? " " : ""}`);
+    }
+    return Array.from(text);
+  }, [splitType, text]);
 
   useEffect(() => {
-    onCompleteRef.current = onLetterAnimationComplete;
-  }, [onLetterAnimationComplete]);
+    if (!ref.current || inView) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setInView(true);
+        observer.disconnect();
+      },
+      { threshold, rootMargin }
+    );
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [inView, rootMargin, threshold]);
 
   useEffect(() => {
-    if (document.fonts.status === "loaded") {
-      setFontsLoaded(true);
-      return;
-    }
-
-    document.fonts.ready.then(() => {
-      setFontsLoaded(true);
-    });
-  }, []);
-
-  useGSAP(
-    () => {
-      if (!ref.current || !text || !fontsLoaded || animationCompletedRef.current) return;
-
-      const el = ref.current as HTMLElement & { _rbsplitInstance?: GSAPSplitText | null };
-
-      if (el._rbsplitInstance) {
-        try {
-          el._rbsplitInstance.revert();
-        } catch {
-          // noop
-        }
-        el._rbsplitInstance = null;
-      }
-
-      const startPct = (1 - threshold) * 100;
-      const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
-      const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
-      const marginUnit = marginMatch ? marginMatch[2] || "px" : "px";
-      const sign =
-        marginValue === 0
-          ? ""
-          : marginValue < 0
-            ? `-=${Math.abs(marginValue)}${marginUnit}`
-            : `+=${marginValue}${marginUnit}`;
-      const start = `top ${startPct}%${sign}`;
-
-      let targets: Element[] | undefined;
-
-      const splitInstance = new GSAPSplitText(el, {
-        type: splitType,
-        smartWrap: true,
-        autoSplit: splitType === "lines",
-        linesClass: "split-line",
-        wordsClass: "split-word",
-        charsClass: "split-char",
-        reduceWhiteSpace: false,
-        onSplit: (self) => {
-          if (splitType.includes("chars") && self.chars.length) targets = self.chars;
-          if (!targets && splitType.includes("words") && self.words.length) targets = self.words;
-          if (!targets && splitType.includes("lines") && self.lines.length) targets = self.lines;
-          if (!targets) targets = self.chars || self.words || self.lines;
-
-          return gsap.fromTo(
-            targets,
-            { ...from },
-            {
-              ...to,
-              duration,
-              ease,
-              stagger: delay / 1000,
-              scrollTrigger: {
-                trigger: el,
-                start,
-                once: true,
-                fastScrollEnd: true,
-                anticipatePin: 0.4,
-              },
-              onComplete: () => {
-                animationCompletedRef.current = true;
-                onCompleteRef.current?.();
-              },
-              willChange: "transform, opacity",
-              force3D: true,
-            }
-          );
-        },
-      });
-
-      el._rbsplitInstance = splitInstance;
-
-      return () => {
-        ScrollTrigger.getAll().forEach((st) => {
-          if (st.trigger === el) st.kill();
-        });
-        try {
-          splitInstance.revert();
-        } catch {
-          // noop
-        }
-        el._rbsplitInstance = null;
-      };
-    },
-    {
-      dependencies: [
-        text,
-        delay,
-        duration,
-        ease,
-        splitType,
-        JSON.stringify(from),
-        JSON.stringify(to),
-        threshold,
-        rootMargin,
-        fontsLoaded,
-      ],
-      scope: ref,
-    }
-  );
+    if (!inView || !onLetterAnimationComplete) return;
+    const totalDelay = (tokens.length - 1) * delay + duration * 1000;
+    const timeout = window.setTimeout(() => onLetterAnimationComplete(), totalDelay);
+    return () => window.clearTimeout(timeout);
+  }, [delay, duration, inView, onLetterAnimationComplete, tokens.length]);
 
   const Tag = tag;
 
   return (
     <Tag
       ref={ref as never}
-      style={{
-        textAlign,
-        overflow: "hidden",
-        display: "inline-block",
-        whiteSpace: "normal",
-        wordWrap: "break-word",
-        willChange: "transform, opacity",
-      }}
       className={`split-parent ${className}`}
+      style={{ textAlign, display: "inline-block", whiteSpace: "pre-wrap" }}
     >
-      {text}
+      {tokens.map((token, idx) => (
+        <span
+          key={`${token}-${idx}`}
+          style={{
+            display: "inline-block",
+            willChange: "transform, opacity",
+            transitionProperty: "transform, opacity",
+            transitionDuration: `${duration}s`,
+            transitionTimingFunction: ease,
+            transitionDelay: `${(idx * delay) / 1000}s`,
+            ...(inView ? to : from),
+          }}
+        >
+          {token}
+        </span>
+      ))}
     </Tag>
   );
 };
