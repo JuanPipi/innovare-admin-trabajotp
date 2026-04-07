@@ -109,6 +109,7 @@ const ContactSection = () => {
             ))}
           </div>
         </div>
+        </ScrollReveal>
       </div>
     </section>
   );
