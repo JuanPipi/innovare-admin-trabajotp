@@ -1,6 +1,6 @@
 # Innovare Strategy Hub
 
-Landing page corporativa para Innovare S.A. - construida con React, Vite y Tailwind.
+Landing page corporativa para Innovare S.A., construida con React, Vite y Tailwind.
 
 ## Scripts
 
