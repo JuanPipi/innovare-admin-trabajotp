@@ -39,7 +39,7 @@ const Navbar = () => {
         {/* Logo */}
         <a href="#inicio" onClick={(e) => handleNav(e, "#inicio")} className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-md overflow-hidden flex items-center justify-center bg-white">
-            <img src="/logo.png" alt="Innovare SA" className="w-full h-full object-contain" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Innovare SA" className="w-full h-full object-contain" />
           </div>
           <span
             className={`text-base font-serif font-bold tracking-tight transition-colors ${
