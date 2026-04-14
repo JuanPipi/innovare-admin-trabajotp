@@ -1,0 +1,69 @@
+import heroBg from "@/assets/hero-bg.jpg";
+import SplitText from "@/components/SplitText";
+
+const HeroSection = () => (
+  <section
+    id="inicio"
+    className="relative min-h-screen flex items-center overflow-hidden"
+  >
+    {/* Background image + overlay */}
+    <div className="absolute inset-0">
+      <img src={heroBg} alt="" className="w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-hero opacity-85" />
+    </div>
+
+    <div className="relative container mx-auto px-4 lg:px-8 py-32 md:py-40">
+      <div className="max-w-3xl">
+        <p className="text-blue-glow text-sm md:text-base font-semibold tracking-widest uppercase mb-4 animate-fade-up">
+          Innovare S.A. — Consultoría Organizacional
+        </p>
+
+        <div className="mb-6 text-primary-foreground">
+          <SplitText
+            text="Transformamos tu empresa con estrategia, liderazgo e innovación."
+            tag="h1"
+            splitType="chars"
+            delay={28}
+            duration={1.1}
+            textAlign="left"
+            className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
+            from={{ opacity: 0, y: 28 }}
+            to={{ opacity: 1, y: 0 }}
+          />
+        </div>
+
+        <SplitText
+          text="Acompañamos a organizaciones en el análisis y mejora integral de su gestión: estrategia, estructura, cultura, procesos e innovación para potenciar tus proyectos, sin límites."
+          tag="p"
+          splitType="words, chars"
+          delay={12}
+          duration={0.9}
+          textAlign="left"
+          className="text-primary-foreground/75 text-lg md:text-xl leading-relaxed max-w-2xl mb-10"
+          from={{ opacity: 0, y: 10 }}
+          to={{ opacity: 1, y: 0 }}
+        />
+
+        <div className="flex flex-wrap gap-4 animate-fade-up-delay-3">
+          <a
+            href="#servicios"
+            className="inline-flex items-center px-7 py-3.5 rounded-lg bg-blue-accent text-accent-foreground font-semibold shadow-btn-accent hover:brightness-110 transition-all"
+          >
+            Conocer servicios
+          </a>
+          <a
+            href="#contacto"
+            className="inline-flex items-center px-7 py-3.5 rounded-lg border-2 border-primary-foreground/30 text-primary-foreground font-semibold hover:bg-primary-foreground/10 transition-all"
+          >
+            Contactanos
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom fade */}
+    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent" />
+  </section>
+);
+
+export default HeroSection;
