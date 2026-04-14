@@ -76,7 +76,7 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
 }
 
@@ -132,4 +132,31 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+@keyframes ball-jump {
+  0%   { transform: translateY(0px);   }
+  42%  { transform: translateY(-72px); }
+  72%  { transform: translateY(0px);   }
+  83%  { transform: translateY(-22px); }
+  92%  { transform: translateY(0px);   }
+  96%  { transform: translateY(-7px);  }
+  100% { transform: translateY(0px);   }
+}
+
+.animate-ball-jump {
+  animation: ball-jump 0.8s ease-in-out;
 }

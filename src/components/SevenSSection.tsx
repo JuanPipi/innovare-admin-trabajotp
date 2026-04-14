@@ -10,17 +10,20 @@ import {
 } from "lucide-react";
 
 const elements = [
-  { icon: Compass, label: "Estrategia", desc: "Definimos el rumbo y las prioridades competitivas." },
-  { icon: Building2, label: "Estructura", desc: "Diseñamos la arquitectura organizacional óptima." },
-  { icon: Cpu, label: "Sistemas", desc: "Optimizamos procesos, flujos y herramientas de gestión." },
-  { icon: Crown, label: "Estilo de gestión", desc: "Fortalecemos el liderazgo y la toma de decisiones." },
-  { icon: UsersRound, label: "Personal", desc: "Potenciamos el talento y el capital humano." },
-  { icon: Wrench, label: "Habilidades", desc: "Desarrollamos competencias clave para el éxito." },
-  { icon: Heart, label: "Valores compartidos", desc: "Alineamos la cultura con la visión organizacional." },
+  { icon: Compass,    label: "Estrategia",         desc: "Definimos el rumbo y las prioridades competitivas." },
+  { icon: Building2,  label: "Estructura",          desc: "Diseñamos la arquitectura organizacional óptima." },
+  { icon: Cpu,        label: "Sistemas",            desc: "Optimizamos procesos, flujos y herramientas de gestión." },
+  { icon: Crown,      label: "Estilo de gestión",   desc: "Fortalecemos el liderazgo y la toma de decisiones." },
+  { icon: UsersRound, label: "Personal",            desc: "Potenciamos el talento y el capital humano." },
+  { icon: Wrench,     label: "Habilidades",         desc: "Desarrollamos competencias clave para el éxito." },
+  { icon: Heart,      label: "Valores compartidos", desc: "Alineamos la cultura con la visión organizacional." },
 ];
 
+// Duplicate so the loop appears seamless
+const track = [...elements, ...elements];
+
 const SevenSSection = () => (
-  <section className="py-24 md:py-32 bg-muted/50">
+  <section className="py-24 md:py-32 bg-muted/50 overflow-hidden">
     <div className="container mx-auto px-4 lg:px-8">
       <ScrollReveal>
         <div className="max-w-3xl mx-auto text-center mb-16">
@@ -37,28 +40,22 @@ const SevenSSection = () => (
           </p>
         </div>
       </ScrollReveal>
+    </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4">
-        {elements.map((e, i) => (
-          <ScrollReveal key={e.label} delay={i * 80}>
+    {/* Full-width marquee (no container clipping) */}
+    <div className="marquee-track w-full overflow-hidden">
+      <div className="animate-marquee flex gap-5 w-max">
+        {track.map((e, i) => (
           <div
-            key={e.label}
-            className="group flex flex-col items-center text-center bg-card rounded-xl p-5 shadow-card hover:shadow-card-hover border border-border hover:border-blue-accent/30 transition-all duration-300"
+            key={i}
+            className="flex flex-col items-center text-center bg-card rounded-xl p-6 shadow-card border border-border w-52 shrink-0"
           >
-            <div className="w-12 h-12 rounded-full bg-blue-accent/10 flex items-center justify-center mb-3 group-hover:bg-blue-accent transition-colors">
-              <e.icon
-                className="text-blue-accent group-hover:text-accent-foreground transition-colors"
-                size={22}
-              />
+            <div className="w-12 h-12 rounded-full bg-blue-accent/10 flex items-center justify-center mb-3">
+              <e.icon className="text-blue-accent" size={22} />
             </div>
-            <h4 className="font-sans text-sm font-bold text-primary mb-1">
-              {e.label}
-            </h4>
-            <p className="text-muted-foreground text-xs leading-relaxed hidden lg:block">
-              {e.desc}
-            </p>
+            <h4 className="font-sans text-sm font-bold text-primary mb-1">{e.label}</h4>
+            <p className="text-muted-foreground text-xs leading-relaxed">{e.desc}</p>
           </div>
-          </ScrollReveal>
         ))}
       </div>
     </div>

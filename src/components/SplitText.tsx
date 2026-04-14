@@ -42,20 +42,20 @@ const SplitText = ({
   }, [splitType, text]);
 
   useEffect(() => {
-    if (!ref.current || inView) return;
+    const el = ref.current;
+    if (!el) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setInView(true);
-        observer.disconnect();
+        // Replay every time the element enters the viewport
+        setInView(entry.isIntersecting);
       },
       { threshold, rootMargin }
     );
 
-    observer.observe(ref.current);
+    observer.observe(el);
     return () => observer.disconnect();
-  }, [inView, rootMargin, threshold]);
+  }, [rootMargin, threshold]);
 
   useEffect(() => {
     if (!inView || !onLetterAnimationComplete) return;
@@ -81,7 +81,7 @@ const SplitText = ({
             transitionProperty: "transform, opacity",
             transitionDuration: `${duration}s`,
             transitionTimingFunction: ease,
-            transitionDelay: `${(idx * delay) / 1000}s`,
+            transitionDelay: inView ? `${(idx * delay) / 1000}s` : "0s",
             ...(inView ? to : from),
           }}
         >

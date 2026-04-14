@@ -18,7 +18,9 @@ const ScrollReveal = ({ children, className = "", delay = 0 }: ScrollRevealProps
       ([entry]) => {
         if (entry.isIntersecting) {
           setTimeout(() => setVisible(true), delay);
-          observer.unobserve(el);
+        } else {
+          // Reset so it replays next time the element enters the viewport
+          setVisible(false);
         }
       },
       { threshold: 0.15 }

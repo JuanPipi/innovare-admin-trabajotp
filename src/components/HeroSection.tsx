@@ -1,5 +1,6 @@
 import heroBg from "@/assets/hero-bg.jpg";
 import SplitText from "@/components/SplitText";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const HeroSection = () => (
   <section
@@ -12,21 +13,23 @@ const HeroSection = () => (
       <div className="absolute inset-0 bg-hero opacity-85" />
     </div>
 
-    <div className="relative container mx-auto px-4 lg:px-8 py-32 md:py-40">
-      <div className="max-w-3xl">
-        <p className="text-blue-glow text-sm md:text-base font-semibold tracking-widest uppercase mb-4 animate-fade-up">
-          Innovare S.A. — Consultoría Organizacional
-        </p>
+    <div className="relative container mx-auto px-4 lg:px-8 py-28 md:py-36 lg:py-44">
+      <div className="max-w-2xl">
+        <ScrollReveal>
+          <p className="text-blue-glow text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-6">
+            Innovare S.A. — Consultoría Organizacional
+          </p>
+        </ScrollReveal>
 
-        <div className="mb-6 text-primary-foreground">
+        <div className="mb-8 text-primary-foreground">
           <SplitText
-            text="Transformamos tu empresa con estrategia, liderazgo e innovación."
+            text="Transformamos empresas con estrategia, liderazgo e innovación."
             tag="h1"
             splitType="chars"
             delay={28}
             duration={1.1}
             textAlign="left"
-            className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
+            className="font-serif text-3xl sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.25rem] font-bold leading-[1.15]"
             from={{ opacity: 0, y: 28 }}
             to={{ opacity: 1, y: 0 }}
           />
@@ -39,25 +42,29 @@ const HeroSection = () => (
           delay={12}
           duration={0.9}
           textAlign="left"
-          className="text-primary-foreground/75 text-lg md:text-xl leading-relaxed max-w-2xl mb-10"
+          className="text-primary-foreground/70 text-base md:text-lg leading-relaxed max-w-xl mb-12"
           from={{ opacity: 0, y: 10 }}
           to={{ opacity: 1, y: 0 }}
         />
 
-        <div className="flex flex-wrap gap-4 animate-fade-up-delay-3">
-          <a
-            href="#servicios"
-            className="inline-flex items-center px-7 py-3.5 rounded-lg bg-blue-accent text-accent-foreground font-semibold shadow-btn-accent hover:brightness-110 transition-all"
-          >
-            Conocer servicios
-          </a>
-          <a
-            href="#contacto"
-            className="inline-flex items-center px-7 py-3.5 rounded-lg border-2 border-primary-foreground/30 text-primary-foreground font-semibold hover:bg-primary-foreground/10 transition-all"
-          >
-            Contactanos
-          </a>
-        </div>
+        <ScrollReveal delay={300}>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="#servicios"
+              className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-accent text-accent-foreground text-sm font-semibold shadow-btn-accent hover:brightness-110 transition-all"
+              onClick={(e) => { e.preventDefault(); import("@/lib/smoothScroll").then(m => m.smoothScrollTo("#servicios")); }}
+            >
+              Conocer servicios
+            </a>
+            <a
+              href="#contacto"
+              className="inline-flex items-center px-6 py-3 rounded-lg border border-primary-foreground/25 text-primary-foreground text-sm font-semibold hover:bg-primary-foreground/8 transition-all"
+              onClick={(e) => { e.preventDefault(); import("@/lib/smoothScroll").then(m => m.smoothScrollTo("#contacto")); }}
+            >
+              Contactanos
+            </a>
+          </div>
+        </ScrollReveal>
       </div>
     </div>
 

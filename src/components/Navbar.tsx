@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { smoothScrollTo } from "@/lib/smoothScroll";
 
 const navLinks = [
   { label: "Inicio", href: "#inicio" },
@@ -9,6 +10,12 @@ const navLinks = [
   { label: "Beneficios", href: "#beneficios" },
   { label: "Contacto", href: "#contacto" },
 ];
+
+function handleNav(e: React.MouseEvent<HTMLAnchorElement>, href: string, onClose?: () => void) {
+  e.preventDefault();
+  onClose?.();
+  smoothScrollTo(href);
+}
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -28,14 +35,14 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between h-16 md:h-20 px-4 lg:px-8">
+      <div className="container mx-auto flex items-center justify-between h-14 md:h-16 px-4 lg:px-8">
         {/* Logo */}
-        <a href="#inicio" className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-lg bg-blue-accent flex items-center justify-center">
-            <span className="text-accent-foreground font-bold text-lg font-serif">I</span>
+        <a href="#inicio" onClick={(e) => handleNav(e, "#inicio")} className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-md overflow-hidden flex items-center justify-center bg-white">
+            <img src="/logo.png" alt="Innovare SA" className="w-full h-full object-contain" />
           </div>
           <span
-            className={`text-xl font-serif font-bold tracking-tight transition-colors ${
+            className={`text-base font-serif font-bold tracking-tight transition-colors ${
               scrolled ? "text-primary" : "text-primary-foreground"
             }`}
           >
@@ -44,11 +51,12 @@ const Navbar = () => {
         </a>
 
         {/* Desktop links */}
-        <ul className="hidden lg:flex items-center gap-8">
+        <ul className="hidden lg:flex items-center gap-7">
           {navLinks.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
+                onClick={(e) => handleNav(e, l.href)}
                 className={`text-sm font-medium transition-colors hover:text-blue-accent ${
                   scrolled ? "text-foreground" : "text-primary-foreground/80"
                 }`}
@@ -62,7 +70,8 @@ const Navbar = () => {
         {/* CTA */}
         <a
           href="#contacto"
-          className="hidden lg:inline-flex items-center px-5 py-2.5 rounded-lg bg-blue-accent text-accent-foreground text-sm font-semibold shadow-btn-accent hover:brightness-110 transition-all"
+          onClick={(e) => handleNav(e, "#contacto")}
+          className="hidden lg:inline-flex items-center px-4 py-2 rounded-md bg-blue-accent text-accent-foreground text-xs font-semibold tracking-wide shadow-btn-accent hover:brightness-110 transition-all"
         >
           Solicitar asesoría
         </a>
@@ -86,7 +95,7 @@ const Navbar = () => {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => handleNav(e, l.href, () => setOpen(false))}
                   className="block py-3 px-3 text-foreground text-sm font-medium rounded-md hover:bg-muted transition-colors"
                 >
                   {l.label}
@@ -96,7 +105,7 @@ const Navbar = () => {
             <li className="pt-2">
               <a
                 href="#contacto"
-                onClick={() => setOpen(false)}
+                onClick={(e) => handleNav(e, "#contacto", () => setOpen(false))}
                 className="block text-center py-3 rounded-lg bg-blue-accent text-accent-foreground text-sm font-semibold"
               >
                 Solicitar asesoría
