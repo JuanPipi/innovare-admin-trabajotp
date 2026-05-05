@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/amazonas-bg.jpg";
 
 const TITLE = "Impulsamos empresas como la naturaleza impulsa vida.";
 const words = TITLE.split(" ");
