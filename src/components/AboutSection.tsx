@@ -23,7 +23,7 @@ const cards = [
 ];
 
 const AboutSection = () => (
-  <section id="nosotros" className="py-24 md:py-32 bg-background">
+  <section id="nosotros" className="py-24 md:py-32 bg-background/80">
     <div className="container mx-auto px-4 lg:px-8">
       <ScrollReveal>
         <div className="max-w-3xl mx-auto text-center mb-16">

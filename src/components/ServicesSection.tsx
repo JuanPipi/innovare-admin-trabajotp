@@ -35,7 +35,7 @@ const services = [
 ];
 
 const ServicesSection = () => (
-  <section id="servicios" className="py-24 md:py-32 bg-muted/60">
+  <section id="servicios" className="py-24 md:py-32 bg-muted/70">
     <div className="container mx-auto px-4 lg:px-8">
       <ScrollReveal>
         <div className="max-w-3xl mx-auto text-center mb-16">
