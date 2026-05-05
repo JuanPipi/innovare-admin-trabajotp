@@ -20,11 +20,11 @@ const ContactSection = () => {
               Contacto
             </p>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-              Conversemos sobre tu proyecto
+              Conversemos sobre tu organización
             </h2>
             <p className="text-muted-foreground text-lg">
-              Completá el formulario y un consultor se pondrá en contacto con vos
-              en las próximas 24 horas.
+              Contanos sobre tu empresa y te contactaremos para coordinar un
+              primer diagnóstico sin cargo.
             </p>
           </div>
         </ScrollReveal>

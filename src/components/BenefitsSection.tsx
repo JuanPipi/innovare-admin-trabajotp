@@ -1,26 +1,26 @@
-import { BarChart3, UserCheck, Sparkles, Target } from "lucide-react";
+import { Globe, Sparkles, BarChart3, Target } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 const benefits = [
   {
-    icon: BarChart3,
-    title: "Análisis integral",
-    desc: "Abordamos cada proyecto con una visión 360° que contempla todas las variables críticas de la organización.",
-  },
-  {
-    icon: UserCheck,
-    title: "Enfoque personalizado",
-    desc: "Cada plan de acción se diseña a medida, considerando el contexto, la cultura y los recursos disponibles.",
+    icon: Globe,
+    title: "Mirada ecosistémica",
+    desc: "No analizamos áreas aisladas: vemos cómo cada decisión afecta al conjunto y diseñamos soluciones que fortalecen el sistema completo.",
   },
   {
     icon: Sparkles,
-    title: "Mirada innovadora",
-    desc: "Incorporamos las últimas tendencias en gestión, tecnología y liderazgo para generar soluciones de vanguardia.",
+    title: "Soluciones a medida",
+    desc: "Diseñamos propuestas según el contexto, recursos y cultura de cada organización, sin recetas genéricas.",
+  },
+  {
+    icon: BarChart3,
+    title: "Innovación aplicable",
+    desc: "Incorporamos tecnología y herramientas de gestión actuales sin perder realismo operativo ni adaptabilidad.",
   },
   {
     icon: Target,
-    title: "Orientación a resultados",
-    desc: "Nuestro compromiso es generar impacto tangible con indicadores claros y metas alcanzables.",
+    title: "Resultados medibles",
+    desc: "Priorizamos acciones concretas con indicadores claros de avance e impacto, para que el progreso sea visible desde el día uno.",
   },
 ];
 
@@ -33,7 +33,7 @@ const BenefitsSection = () => (
             ¿Por qué elegirnos?
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-            Nuestros diferenciales
+            Por qué nuestro enfoque genera impacto
           </h2>
         </div>
       </ScrollReveal>

@@ -6,49 +6,49 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 40% 10%;
+    --background: 44 30% 96%;
+    --foreground: 160 50% 8%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 40% 10%;
+    --card: 44 20% 99%;
+    --card-foreground: 160 50% 8%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 40% 10%;
+    --popover: 44 20% 99%;
+    --popover-foreground: 160 50% 8%;
 
-    --primary: 215 70% 18%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 160 62% 11%;
+    --primary-foreground: 44 40% 95%;
 
-    --secondary: 215 55% 30%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 150 59% 30%;
+    --secondary-foreground: 44 40% 95%;
 
-    --muted: 220 20% 94%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 44 20% 92%;
+    --muted-foreground: 160 15% 42%;
 
-    --accent: 210 90% 55%;
+    --accent: 142 55% 40%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 44 40% 95%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 215 70% 18%;
+    --border: 160 18% 87%;
+    --input: 160 18% 87%;
+    --ring: 160 62% 11%;
 
     --radius: 0.625rem;
 
-    /* Custom tokens */
-    --navy: 215 70% 12%;
-    --navy-light: 215 55% 20%;
-    --blue-mid: 215 55% 30%;
-    --blue-accent: 210 90% 55%;
-    --blue-glow: 200 85% 65%;
-    --ice: 210 40% 96%;
-    --gradient-hero: linear-gradient(135deg, hsl(215 70% 12%) 0%, hsl(215 55% 25%) 50%, hsl(210 60% 35%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(210 90% 55%), hsl(200 85% 65%));
-    --gradient-cta: linear-gradient(135deg, hsl(215 70% 15%) 0%, hsl(210 60% 30%) 100%);
-    --shadow-card: 0 4px 24px -4px hsl(215 70% 18% / 0.08);
-    --shadow-card-hover: 0 12px 40px -8px hsl(215 70% 18% / 0.15);
-    --shadow-button: 0 4px 14px -2px hsl(210 90% 55% / 0.4);
+    /* Custom tokens — ecosistema verde */
+    --navy: 160 62% 8%;
+    --navy-light: 160 52% 16%;
+    --blue-mid: 150 59% 30%;
+    --blue-accent: 142 55% 40%;
+    --blue-glow: 142 70% 60%;
+    --ice: 44 38% 93%;
+    --gradient-hero: linear-gradient(135deg, hsl(160 62% 8%) 0%, hsl(160 55% 14%) 50%, hsl(150 50% 20%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(142 55% 40%), hsl(142 70% 55%));
+    --gradient-cta: linear-gradient(135deg, hsl(160 62% 9%) 0%, hsl(150 55% 20%) 100%);
+    --shadow-card: 0 4px 24px -4px hsl(160 62% 11% / 0.08);
+    --shadow-card-hover: 0 12px 40px -8px hsl(160 62% 11% / 0.16);
+    --shadow-button: 0 4px 14px -2px hsl(142 55% 40% / 0.4);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;

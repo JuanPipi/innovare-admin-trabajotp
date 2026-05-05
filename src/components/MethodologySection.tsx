@@ -1,31 +1,31 @@
 import { useState, useEffect, useRef } from "react";
-import { ClipboardList, Stethoscope, FileCheck, Rocket } from "lucide-react";
+import { Compass, Search, Lightbulb, Rocket } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 const steps = [
   {
     num: "01",
-    icon: ClipboardList,
-    title: "Relevamiento",
-    desc: "Recopilamos información clave a través de entrevistas, observación y análisis documental para comprender la realidad organizacional.",
+    icon: Search,
+    title: "Explorar",
+    desc: "Relevamos información, observamos procesos y comprendemos la realidad organizacional a través de entrevistas y análisis documental.",
   },
   {
     num: "02",
-    icon: Stethoscope,
-    title: "Diagnóstico",
-    desc: "Procesamos los datos obtenidos para identificar problemáticas, causas raíz y áreas de oportunidad con una mirada sistémica.",
+    icon: Compass,
+    title: "Diagnosticar",
+    desc: "Identificamos causas, brechas y oportunidades desde una mirada sistémica que contempla todas las dimensiones de la organización.",
   },
   {
     num: "03",
-    icon: FileCheck,
-    title: "Propuesta de mejora",
-    desc: "Diseñamos un plan de acción con recomendaciones concretas, priorizadas y adaptadas a los recursos y objetivos de la organización.",
+    icon: Lightbulb,
+    title: "Diseñar",
+    desc: "Creamos propuestas de mejora alineadas con los objetivos y recursos disponibles, priorizando acciones de alto impacto.",
   },
   {
     num: "04",
     icon: Rocket,
-    title: "Implementación",
-    desc: "Acompañamos la ejecución de las recomendaciones, asegurando una transición efectiva y resultados medibles.",
+    title: "Implementar",
+    desc: "Acompañamos la ejecución, asegurando una transición efectiva con indicadores claros y resultados medibles.",
   },
 ];
 
@@ -34,7 +34,6 @@ const colCenters = ["12.5%", "37.5%", "62.5%", "87.5%"];
 
 const MethodologySection = () => {
   const [active, setActive] = useState(0);
-  // Ref on the INNER div — only translateY animation, no transform conflict
   const innerRef = useRef<HTMLDivElement>(null);
   const initialized = useRef(false);
 
@@ -42,11 +41,10 @@ const MethodologySection = () => {
     const el = innerRef.current;
     if (!el) return;
     el.classList.remove("animate-ball-jump");
-    void el.offsetWidth; // force reflow so browser re-registers the animation
+    void el.offsetWidth;
     el.classList.add("animate-ball-jump");
   };
 
-  // Fire jump animation whenever active changes (skip very first render)
   useEffect(() => {
     if (!initialized.current) {
       initialized.current = true;
@@ -74,8 +72,8 @@ const MethodologySection = () => {
               Nuestro proceso de trabajo
             </h2>
             <p className="text-muted-foreground text-lg">
-              Un enfoque estructurado y probado que garantiza resultados en cada
-              etapa del proyecto.
+              Un enfoque estructurado que garantiza claridad, coherencia y
+              resultados concretos en cada etapa del proyecto.
             </p>
           </div>
         </ScrollReveal>
@@ -84,19 +82,7 @@ const MethodologySection = () => {
           {/* Connector line */}
           <div className="hidden md:block absolute top-[4.5rem] left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-blue-accent/20 via-blue-accent/40 to-blue-accent/20" />
 
-          {/*
-            BALL — desktop only.
-
-            Architecture (two divs, no transform conflict):
-            · Outer div  → controls LEFT (horizontal via CSS transition). No transform.
-                           marginLeft: -8px centers the 16px ball on the column.
-            · Inner div  → carries only the jump animation (translateY only).
-                           No inline transform → keyframe has full ownership of `transform`.
-
-            top: 1rem puts the ball just above the circle top edge.
-            (connector line is at 4.5rem = 72px → circle centers at 72px →
-             circle tops at 72-40 = 32px = 2rem → ball bottom at 2rem → top = 2rem - 1rem = 1rem)
-          */}
+          {/* BALL — desktop only */}
           <div
             className="hidden md:block absolute z-20"
             style={{
@@ -107,10 +93,8 @@ const MethodologySection = () => {
             }}
           >
             <div ref={innerRef}>
-              {/* Pulse ring */}
               <span className="absolute inset-0 rounded-full bg-blue-accent opacity-40 animate-ping" />
-              {/* Ball */}
-              <span className="relative block w-4 h-4 rounded-full bg-blue-accent shadow-[0_0_14px_6px_rgba(59,130,246,0.6)]" />
+              <span className="relative block w-4 h-4 rounded-full bg-blue-accent shadow-[0_0_14px_6px_rgba(52,168,83,0.6)]" />
             </div>
           </div>
 
@@ -125,7 +109,7 @@ const MethodologySection = () => {
                 <div
                   className={`relative z-10 w-20 h-20 rounded-full bg-card border-2 flex items-center justify-center mb-6 transition-all duration-500 ${
                     active === i
-                      ? "border-blue-accent shadow-[0_0_28px_8px_rgba(59,130,246,0.22)]"
+                      ? "border-blue-accent shadow-[0_0_28px_8px_rgba(52,168,83,0.22)]"
                       : "border-blue-accent/30 shadow-card"
                   }`}
                 >

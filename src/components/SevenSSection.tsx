@@ -31,12 +31,12 @@ const SevenSSection = () => (
             Enfoque integral
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-            Las 7 dimensiones de la gestión
+            Las 7 raíces de una organización sólida
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Trabajamos con una mirada sistémica que abarca las siete dimensiones
-            clave de toda organización, asegurando coherencia y alineación en cada
-            intervención.
+            Toda organización crece cuando sus dimensiones internas están alineadas.
+            Por eso analizamos las 7S como raíces conectadas de un mismo ecosistema
+            de gestión.
           </p>
         </div>
       </ScrollReveal>

@@ -17,16 +17,16 @@ const HeroSection = () => (
       <div className="max-w-2xl">
         <ScrollReveal>
           <p className="text-blue-glow text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-6">
-            Innovare S.A. — Consultoría Organizacional
+            Innovare S.A. — Consultoría Ecosistémica
           </p>
         </ScrollReveal>
 
         <div className="mb-8 text-primary-foreground">
           <SplitText
-            text="Transformamos empresas con estrategia, liderazgo e innovación."
+            text="Impulsamos empresas como la naturaleza impulsa vida."
             tag="h1"
-            splitType="chars"
-            delay={28}
+            splitType="words"
+            delay={60}
             duration={1.1}
             textAlign="left"
             className="font-serif text-3xl sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.25rem] font-bold leading-[1.15]"
@@ -36,10 +36,10 @@ const HeroSection = () => (
         </div>
 
         <SplitText
-          text="Acompañamos a organizaciones en el análisis y mejora integral de su gestión: estrategia, estructura, cultura, procesos e innovación para potenciar tus proyectos, sin límites."
+          text="Estrategia, cultura, procesos y tecnología trabajando como un ecosistema: conectado, adaptable y preparado para crecer."
           tag="p"
-          splitType="words, chars"
-          delay={12}
+          splitType="words"
+          delay={40}
           duration={0.9}
           textAlign="left"
           className="text-primary-foreground/70 text-base md:text-lg leading-relaxed max-w-xl mb-12"
@@ -50,18 +50,18 @@ const HeroSection = () => (
         <ScrollReveal delay={300}>
           <div className="flex flex-wrap gap-3">
             <a
-              href="#servicios"
+              href="#nosotros"
               className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-accent text-accent-foreground text-sm font-semibold shadow-btn-accent hover:brightness-110 transition-all"
-              onClick={(e) => { e.preventDefault(); import("@/lib/smoothScroll").then(m => m.smoothScrollTo("#servicios")); }}
+              onClick={(e) => { e.preventDefault(); import("@/lib/smoothScroll").then(m => m.smoothScrollTo("#nosotros")); }}
             >
-              Conocer servicios
+              Conocer nuestro enfoque
             </a>
             <a
               href="#contacto"
-              className="inline-flex items-center px-6 py-3 rounded-lg border border-primary-foreground/25 text-primary-foreground text-sm font-semibold hover:bg-primary-foreground/8 transition-all"
+              className="inline-flex items-center px-6 py-3 rounded-lg border border-primary-foreground/25 text-primary-foreground text-sm font-semibold hover:bg-primary-foreground/10 transition-all"
               onClick={(e) => { e.preventDefault(); import("@/lib/smoothScroll").then(m => m.smoothScrollTo("#contacto")); }}
             >
-              Contactanos
+              Solicitar diagnóstico
             </a>
           </div>
         </ScrollReveal>

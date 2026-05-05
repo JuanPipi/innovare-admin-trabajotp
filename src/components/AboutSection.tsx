@@ -5,20 +5,20 @@ const cards = [
   {
     icon: Target,
     tag: "Misión",
-    title: "Concretando sueños",
-    desc: "La gran cantidad de obras de la más diversa escala en las que participamos continuamente nos impulsa a superar metas, objetivos y estándares de calidad.",
+    title: "Cultivar organizaciones eficientes",
+    desc: "Acompañar a empresas en el análisis y mejora de su gestión, integrando estrategia, personas, procesos y tecnología para que crezcan de forma sostenible.",
   },
   {
     icon: Eye,
     tag: "Visión",
-    title: "Liderazgo con propósito",
-    desc: "Ser una empresa líder en soluciones integrales para la industria, reconocida por su calidad, innovación y compromiso con los más altos estándares.",
+    title: "Referencia en consultoría ecosistémica",
+    desc: "Ser reconocidos por diseñar soluciones organizacionales innovadoras, sostenibles y adaptadas a la realidad de cada empresa.",
   },
   {
     icon: Heart,
     tag: "Valores",
     title: "Nuestros principios",
-    desc: null,
+    desc: "Sustentabilidad, innovación, compromiso, colaboración, transparencia y orientación a resultados.",
   },
 ];
 
@@ -31,15 +31,14 @@ const AboutSection = () => (
             Sobre nosotros
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-            Consultoría con propósito e impacto
+            Crecimiento con raíces sólidas
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             En <span className="font-semibold text-foreground">Innovare</span>{" "}
-            acompañamos a organizaciones en el análisis y mejora de su gestión,
-            ayudando a alinear estrategia, cultura, estructura, personas y
-            procesos. Nuestro enfoque integral permite identificar oportunidades
-            de mejora y diseñar soluciones que impulsen el crecimiento y la
-            eficiencia organizacional.
+            entendemos a cada organización como un ecosistema: personas, procesos,
+            cultura, estructura y tecnología interactúan entre sí. Nuestro trabajo
+            consiste en diagnosticar esas conexiones, detectar desequilibrios y
+            diseñar soluciones que permitan crecer de forma sostenible.
           </p>
         </div>
       </ScrollReveal>
@@ -57,11 +56,7 @@ const AboutSection = () => (
                 </span>
               </div>
               <h3 className="font-serif text-xl font-bold text-primary mb-3">{c.title}</h3>
-              {c.desc ? (
-                <p className="text-muted-foreground leading-relaxed">{c.desc}</p>
-              ) : (
-                <p className="text-muted-foreground/40 text-sm italic">Próximamente…</p>
-              )}
+              <p className="text-muted-foreground leading-relaxed">{c.desc}</p>
             </div>
           </ScrollReveal>
         ))}

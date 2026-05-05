@@ -11,33 +11,33 @@ import {
 const services = [
   {
     icon: Search,
-    title: "Diagnóstico organizacional",
-    desc: "Evaluamos la situación actual de tu organización para identificar fortalezas, debilidades y oportunidades de mejora.",
+    title: "Diagnóstico del ecosistema organizacional",
+    desc: "Analizamos cómo interactúan las áreas, procesos, personas y recursos para detectar oportunidades de mejora con una mirada sistémica.",
   },
   {
     icon: Target,
-    title: "Consultoría estratégica",
-    desc: "Diseñamos planes estratégicos alineados con tu visión, misión y objetivos para potenciar el crecimiento sostenible.",
+    title: "Estrategia para crecimiento sostenible",
+    desc: "Diseñamos planes estratégicos alineados con los objetivos, capacidades y contexto de cada organización.",
   },
   {
     icon: GitBranch,
-    title: "Análisis de estructura y procesos",
-    desc: "Optimizamos la arquitectura organizacional y los flujos de trabajo para ganar eficiencia y agilidad operativa.",
+    title: "Optimización de procesos y estructura",
+    desc: "Rediseñamos flujos de trabajo para mejorar eficiencia, coordinación y toma de decisiones en toda la organización.",
   },
   {
     icon: Users,
-    title: "Cultura organizacional y liderazgo",
-    desc: "Fortalecemos la cultura interna y desarrollamos capacidades de liderazgo para equipos de alto rendimiento.",
+    title: "Cultura y liderazgo adaptativo",
+    desc: "Fortalecemos estilos de gestión, motivación y liderazgo para construir equipos más comprometidos y resilientes.",
   },
   {
     icon: Monitor,
-    title: "Mejora de gestión con TICs",
-    desc: "Incorporamos tecnologías de la información para modernizar procesos, mejorar la toma de decisiones y aumentar la productividad.",
+    title: "Gestión con TICs",
+    desc: "Incorporamos herramientas digitales para ordenar información, agilizar procesos y mejorar la productividad sin perder realismo operativo.",
   },
   {
     icon: TrendingUp,
-    title: "Propuestas de optimización empresarial",
-    desc: "Elaboramos propuestas concretas y accionables para optimizar recursos, reducir costos y maximizar resultados.",
+    title: "Propuestas de mejora medibles",
+    desc: "Traducimos el diagnóstico en acciones concretas, indicadores claros y prioridades de implementación con impacto real.",
   },
 ];
 
@@ -50,12 +50,12 @@ const ServicesSection = () => (
             Nuestros servicios
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-            Soluciones integrales para tu organización
+            Soluciones para cada dimensión del ecosistema
           </h2>
           <p className="text-muted-foreground text-lg">
-            Ofrecemos un portfolio completo de servicios de consultoría diseñados
-            para abordar los desafíos organizacionales desde múltiples
-            perspectivas.
+            Un portfolio completo de servicios de consultoría diseñados para
+            abordar los desafíos organizacionales desde múltiples perspectivas
+            y con resultados concretos.
           </p>
         </div>
       </ScrollReveal>
