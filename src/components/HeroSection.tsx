@@ -202,8 +202,8 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-background/40 to-transparent" />
+      {/* Bottom fade — funde hacia la primera sección */}
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };

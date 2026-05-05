@@ -12,17 +12,17 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contacto" className="py-24 md:py-32 bg-primary">
+    <section id="contacto" className="py-24 md:py-32 bg-muted/60">
       <div className="container mx-auto px-4 lg:px-8">
         <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <p className="text-blue-glow text-sm font-semibold tracking-widest uppercase mb-3">
+            <p className="text-blue-accent text-sm font-semibold tracking-widest uppercase mb-3">
               Contacto
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
               Conversemos sobre tu organización
             </h2>
-            <p className="text-primary-foreground/65 text-lg">
+            <p className="text-muted-foreground text-lg">
               Contanos sobre tu empresa y te contactaremos para coordinar un
               primer diagnóstico sin cargo.
             </p>
@@ -34,50 +34,50 @@ const ContactSection = () => {
             {/* Form */}
             <form
               onSubmit={handleSubmit}
-              className="lg:col-span-3 rounded-xl p-8 border border-white/10 bg-white/5 space-y-5"
+              className="lg:col-span-3 bg-card rounded-xl p-8 shadow-card border border-border space-y-5"
             >
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">Nombre</label>
+                  <label className="block text-sm font-medium text-foreground mb-1.5">Nombre</label>
                   <input
                     type="text"
                     required
                     value={form.nombre}
                     onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-                    className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/35 focus:outline-none focus:ring-2 focus:ring-blue-glow/40 transition-shadow"
+                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-accent/40 transition-shadow"
                     placeholder="Tu nombre completo"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">Empresa</label>
+                  <label className="block text-sm font-medium text-foreground mb-1.5">Empresa</label>
                   <input
                     type="text"
                     value={form.empresa}
                     onChange={(e) => setForm({ ...form, empresa: e.target.value })}
-                    className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/35 focus:outline-none focus:ring-2 focus:ring-blue-glow/40 transition-shadow"
+                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-accent/40 transition-shadow"
                     placeholder="Nombre de tu empresa"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">Email</label>
+                <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
                 <input
                   type="email"
                   required
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/35 focus:outline-none focus:ring-2 focus:ring-blue-glow/40 transition-shadow"
+                  className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-accent/40 transition-shadow"
                   placeholder="correo@empresa.com"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">Mensaje</label>
+                <label className="block text-sm font-medium text-foreground mb-1.5">Mensaje</label>
                 <textarea
                   required
                   rows={4}
                   value={form.mensaje}
                   onChange={(e) => setForm({ ...form, mensaje: e.target.value })}
-                  className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/35 focus:outline-none focus:ring-2 focus:ring-blue-glow/40 transition-shadow resize-none"
+                  className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-accent/40 transition-shadow resize-none"
                   placeholder="Contanos sobre tu organización o consulta..."
                 />
               </div>
@@ -98,12 +98,12 @@ const ContactSection = () => {
                 { icon: Globe, label: "Sitio web", value: "www.innovareconsultora.com" },
               ].map((item) => (
                 <div key={item.label} className="flex gap-4 items-start">
-                  <div className="w-11 h-11 rounded-lg bg-blue-glow/15 flex items-center justify-center shrink-0">
-                    <item.icon className="text-blue-glow" size={20} />
+                  <div className="w-11 h-11 rounded-lg bg-blue-accent/10 flex items-center justify-center shrink-0">
+                    <item.icon className="text-blue-accent" size={20} />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-primary-foreground">{item.label}</p>
-                    <p className="text-primary-foreground/55 text-sm">{item.value}</p>
+                    <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                    <p className="text-muted-foreground text-sm">{item.value}</p>
                   </div>
                 </div>
               ))}

@@ -25,14 +25,14 @@ const benefits = [
 ];
 
 const BenefitsSection = () => (
-  <section id="beneficios" className="py-24 md:py-32 bg-hero">
+  <section id="beneficios" className="py-24 md:py-32 bg-background">
     <div className="container mx-auto px-4 lg:px-8">
       <ScrollReveal>
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <p className="text-blue-glow text-sm font-semibold tracking-widest uppercase mb-3">
+          <p className="text-blue-accent text-sm font-semibold tracking-widest uppercase mb-3">
             ¿Por qué elegirnos?
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
             Por qué nuestro enfoque genera impacto
           </h2>
         </div>
@@ -42,15 +42,11 @@ const BenefitsSection = () => (
         {benefits.map((b, i) => (
           <ScrollReveal key={b.title} delay={i * 120}>
             <div className="text-center">
-              <div className="w-16 h-16 rounded-2xl bg-blue-glow/15 flex items-center justify-center mx-auto mb-5">
-                <b.icon className="text-blue-glow" size={30} />
+              <div className="w-16 h-16 rounded-2xl bg-blue-accent/10 flex items-center justify-center mx-auto mb-5">
+                <b.icon className="text-blue-accent" size={30} />
               </div>
-              <h3 className="font-sans text-lg font-bold text-primary-foreground mb-2">
-                {b.title}
-              </h3>
-              <p className="text-primary-foreground/60 text-sm leading-relaxed">
-                {b.desc}
-              </p>
+              <h3 className="font-sans text-lg font-bold text-primary mb-2">{b.title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{b.desc}</p>
             </div>
           </ScrollReveal>
         ))}
