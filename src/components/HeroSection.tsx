@@ -14,8 +14,9 @@ const HeroSection = () => {
   const [touchStart, setTouchStart]       = useState(0);
   const [isMobile, setIsMobile]           = useState(false);
 
-  const progressRef = useRef(0);
-  const unlockedRef = useRef(false);
+  const progressRef     = useRef(0);
+  const unlockedRef     = useRef(false);
+  const hasScrolledAway = useRef(false); // true después de bajar al menos 50px
 
   // Keep refs in sync so event handlers always read latest value
   useEffect(() => { progressRef.current = progress; }, [progress]);
@@ -39,6 +40,7 @@ const HeroSection = () => {
 
       if (next >= 1 && !unlockedRef.current) {
         unlockedRef.current = true;
+        hasScrolledAway.current = false; // reset: aún no bajó
         setUnlocked(true);
         setShowContent(true);
       }
@@ -47,10 +49,7 @@ const HeroSection = () => {
 
     const onWheel = (e: WheelEvent) => {
       if (unlockedRef.current && e.deltaY < 0 && window.scrollY <= 5) {
-        // scrolling back to top → re-lock
-        unlockedRef.current = false;
-        setUnlocked(false);
-        setShowContent(false);
+        reset();
         e.preventDefault();
         return;
       }
@@ -66,9 +65,7 @@ const HeroSection = () => {
       if (!touchStart) return;
       const dy = touchStart - e.touches[0].clientY;
       if (unlockedRef.current && dy < -20 && window.scrollY <= 5) {
-        unlockedRef.current = false;
-        setUnlocked(false);
-        setShowContent(false);
+        reset();
         e.preventDefault();
         return;
       }
@@ -79,8 +76,24 @@ const HeroSection = () => {
       }
     };
 
+    const reset = () => {
+      unlockedRef.current     = false;
+      hasScrolledAway.current = false;
+      progressRef.current     = 0;
+      setUnlocked(false);
+      setShowContent(false);
+      setProgress(0);
+    };
+
     const onScroll = () => {
-      if (!unlockedRef.current) window.scrollTo(0, 0);
+      if (!unlockedRef.current) {
+        window.scrollTo(0, 0);
+        return;
+      }
+      // Marcar que el usuario ya bajó la página
+      if (window.scrollY > 50) hasScrolledAway.current = true;
+      // Si volvió al top después de haber bajado → reiniciar animación
+      if (hasScrolledAway.current && window.scrollY <= 5) reset();
     };
 
     window.addEventListener("wheel",      onWheel,      { passive: false });
