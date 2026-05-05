@@ -25,7 +25,7 @@ const benefits = [
 ];
 
 const BenefitsSection = () => (
-  <section id="beneficios" className="py-24 md:py-32 bg-background/80">
+  <section id="beneficios" className="py-24 md:py-32 bg-background">
     <div className="container mx-auto px-4 lg:px-8">
       <ScrollReveal>
         <div className="max-w-3xl mx-auto text-center mb-16">

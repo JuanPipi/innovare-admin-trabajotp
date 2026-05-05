@@ -14,7 +14,7 @@ const elements = [
 const track = [...elements, ...elements];
 
 const SevenSSection = () => (
-  <section className="py-24 md:py-32 bg-muted/70 overflow-hidden">
+  <section className="py-24 md:py-32 bg-muted/60 overflow-hidden">
     <div className="container mx-auto px-4 lg:px-8">
       <ScrollReveal>
         <div className="max-w-3xl mx-auto text-center mb-16">

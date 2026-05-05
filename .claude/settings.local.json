@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:reactbits.dev)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npx shadcn@latest add \"https://reactbits.dev/r/border-glow\" --yes)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/DavidHDev/react-bits/main/src/components/Components/BorderGlow/BorderGlow.jsx\")",
+      "Bash(curl -s \"https://api.github.com/repos/DavidHDev/react-bits/git/trees/main?recursive=1\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/DavidHDev/react-bits/main/src/ts-default/Components/BorderGlow/BorderGlow.tsx\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/DavidHDev/react-bits/main/src/ts-default/Components/BorderGlow/BorderGlow.css\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git checkout:*)",
+      "Bash(npm run:*)",
+      "Bash(ffmpeg -version)",
+      "Bash(ffmpeg -i \"/c/Users/juanp/OneDrive/Documentos/innovare-strategy-hub-main/src/assets/amazonas-bg.jpg\" -vf \"scale=1920:-1\" -q:v 3 \"/c/Users/juanp/OneDrive/Documentos/innovare-strategy-hub-main/src/assets/amazonas-bg-opt.jpg\" -y)",
+      "Bash(ls -lh \"/c/Users/juanp/OneDrive/Documentos/innovare-strategy-hub-main/src/assets/amazonas-bg\"*)",
+      "Bash(ffprobe:*)",
+      "Bash(ffmpeg -i \"/c/Users/juanp/OneDrive/Documentos/innovare-strategy-hub-main/src/assets/amazonas-bg.jpg\" -vf \"scale=1440:-1\" -update 1 -q:v 5 \"/c/Users/juanp/OneDrive/Documentos/innovare-strategy-hub-main/src/assets/amazonas-bg-opt.jpg\" -y)",
+      "Bash(ffmpeg -i \"/c/Users/juanp/OneDrive/Documentos/innovare-strategy-hub-main/src/assets/amazonas-bg.jpg\" -vf \"scale=1440:-1\" -update 1 -quality 82 \"/c/Users/juanp/OneDrive/Documentos/innovare-strategy-hub-main/src/assets/amazonas-bg.webp\" -y)",
+      "Bash(ffmpeg -i \"/c/Users/juanp/OneDrive/Documentos/innovare-strategy-hub-main/src/assets/amazonas-bg.jpg\" -vf \"scale=1440:-1\" -update 1 -quality 72 \"/c/Users/juanp/OneDrive/Documentos/innovare-strategy-hub-main/src/assets/amazonas-bg-q72.webp\" -y)",
+      "Bash(git rm:*)"
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
+  }
+}
