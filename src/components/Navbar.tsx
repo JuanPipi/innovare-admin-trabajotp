@@ -31,7 +31,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-card/95 backdrop-blur-md shadow-card border-b border-border"
+          ? "bg-primary/95 backdrop-blur-md shadow-card border-b border-white/10"
           : "bg-transparent"
       }`}
     >
@@ -41,11 +41,7 @@ const Navbar = () => {
           <div className="w-9 h-9 rounded-md overflow-hidden flex items-center justify-center bg-white">
             <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Innovare SA" className="w-full h-full object-contain" />
           </div>
-          <span
-            className={`text-base font-serif font-bold tracking-tight transition-colors ${
-              scrolled ? "text-primary" : "text-primary-foreground"
-            }`}
-          >
+          <span className="text-base font-serif font-bold tracking-tight text-primary-foreground">
             Innovare
           </span>
         </a>
@@ -57,9 +53,7 @@ const Navbar = () => {
               <a
                 href={l.href}
                 onClick={(e) => handleNav(e, l.href)}
-                className={`text-sm font-medium transition-colors hover:text-blue-accent ${
-                  scrolled ? "text-foreground" : "text-primary-foreground/80"
-                }`}
+                className="text-sm font-medium transition-colors text-primary-foreground/75 hover:text-blue-glow"
               >
                 {l.label}
               </a>
@@ -79,9 +73,7 @@ const Navbar = () => {
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className={`lg:hidden p-2 rounded-md transition-colors ${
-            scrolled ? "text-foreground" : "text-primary-foreground"
-          }`}
+          className="lg:hidden p-2 rounded-md transition-colors text-primary-foreground"
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -89,14 +81,14 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {open && (
-        <div className="lg:hidden bg-card/98 backdrop-blur-lg border-t border-border animate-fade-up">
+        <div className="lg:hidden bg-primary/98 backdrop-blur-lg border-t border-white/10 animate-fade-up">
           <ul className="flex flex-col gap-1 px-4 py-4">
             {navLinks.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
                   onClick={(e) => handleNav(e, l.href, () => setOpen(false))}
-                  className="block py-3 px-3 text-foreground text-sm font-medium rounded-md hover:bg-muted transition-colors"
+                  className="block py-3 px-3 text-primary-foreground/80 text-sm font-medium rounded-md hover:bg-white/10 transition-colors"
                 >
                   {l.label}
                 </a>
