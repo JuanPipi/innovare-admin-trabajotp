@@ -8,7 +8,7 @@ const navLinks = [
   { label: "Servicios", href: "#servicios" },
   { label: "Metodología", href: "#metodologia" },
   { label: "Beneficios", href: "#beneficios" },
-  { label: "Análisis TP", href: "#analisis" },
+  { label: "Análisis Sullair", href: "#analisis" },
   { label: "Contacto", href: "#contacto" },
 ];
 
@@ -56,7 +56,9 @@ const Navbar = () => {
                 onClick={(e) => handleNav(e, l.href)}
                 className={`text-sm font-medium transition-colors hover:text-blue-accent ${scrolled ? "text-foreground" : "text-primary-foreground/80"}`}
               >
-                {l.label}
+                {l.href === "#analisis" ? (
+                  <>Análisis <span className="text-blue-accent font-semibold">Sullair</span></>
+                ) : l.label}
               </a>
             </li>
           ))}
@@ -91,7 +93,9 @@ const Navbar = () => {
                   onClick={(e) => handleNav(e, l.href, () => setOpen(false))}
                   className="block py-3 px-3 text-foreground text-sm font-medium rounded-md hover:bg-muted transition-colors"
                 >
-                  {l.label}
+                  {l.href === "#analisis" ? (
+                    <>Análisis <span className="text-blue-accent font-semibold">Sullair</span></>
+                  ) : l.label}
                 </a>
               </li>
             ))}
