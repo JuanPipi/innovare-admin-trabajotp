@@ -4,23 +4,17 @@ import heroBg from "@/assets/amazonas-bg.webp";
 const TITLE = "Impulsamos empresas como la naturaleza impulsa vida.";
 const words = TITLE.split(" ");
 const half = Math.ceil(words.length / 2);
-const LEFT_TEXT  = words.slice(0, half).join(" ");   // "Impulsamos empresas como la"
-const RIGHT_TEXT = words.slice(half).join(" ");       // "naturaleza impulsa vida."
+const LEFT_TEXT  = words.slice(0, half).join(" ");
+const RIGHT_TEXT = words.slice(half).join(" ");
+
+const ANIM_DURATION = 1400; // ms
 
 const HeroSection = () => {
-  const [progress, setProgress]           = useState(0);   // 0 → 1
-  const [unlocked, setUnlocked]           = useState(false);
-  const [showContent, setShowContent]     = useState(false);
-  const [touchStart, setTouchStart]       = useState(0);
-  const [isMobile, setIsMobile]           = useState(false);
+  const [progress, setProgress] = useState(0);   // 0 → 1
+  const [showContent, setShowContent] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const progressRef     = useRef(0);
-  const unlockedRef     = useRef(false);
-  const hasScrolledAway = useRef(false); // true después de bajar al menos 50px
-
-  // Keep refs in sync so event handlers always read latest value
-  useEffect(() => { progressRef.current = progress; }, [progress]);
-  useEffect(() => { unlockedRef.current = unlocked; }, [unlocked]);
+  const rafRef = useRef<number | null>(null);
 
   // Mobile detection
   useEffect(() => {
@@ -30,88 +24,26 @@ const HeroSection = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // Scroll / touch handling
+  // Auto-animate on mount
   useEffect(() => {
-    const advance = (delta: number) => {
-      const step = delta * (isMobile ? 0.006 : 0.0009);
-      const next = Math.min(Math.max(progressRef.current + step, 0), 1);
-      progressRef.current = next;
-      setProgress(next);
-
-      if (next >= 1 && !unlockedRef.current) {
-        unlockedRef.current = true;
-        hasScrolledAway.current = false; // reset: aún no bajó
-        setUnlocked(true);
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / ANIM_DURATION, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - t, 3);
+      setProgress(eased);
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
         setShowContent(true);
       }
-      if (next < 0.75) setShowContent(false);
     };
-
-    const onWheel = (e: WheelEvent) => {
-      if (unlockedRef.current && e.deltaY < 0 && window.scrollY <= 5) {
-        reset();
-        e.preventDefault();
-        return;
-      }
-      if (!unlockedRef.current) {
-        e.preventDefault();
-        advance(e.deltaY);
-      }
-    };
-
-    const onTouchStart = (e: TouchEvent) => setTouchStart(e.touches[0].clientY);
-
-    const onTouchMove = (e: TouchEvent) => {
-      if (!touchStart) return;
-      const dy = touchStart - e.touches[0].clientY;
-      if (unlockedRef.current && dy < -20 && window.scrollY <= 5) {
-        reset();
-        e.preventDefault();
-        return;
-      }
-      if (!unlockedRef.current) {
-        e.preventDefault();
-        advance(dy);
-        setTouchStart(e.touches[0].clientY);
-      }
-    };
-
-    const reset = () => {
-      unlockedRef.current     = false;
-      hasScrolledAway.current = false;
-      progressRef.current     = 0;
-      setUnlocked(false);
-      setShowContent(false);
-      setProgress(0);
-    };
-
-    const onScroll = () => {
-      if (!unlockedRef.current) {
-        window.scrollTo(0, 0);
-        return;
-      }
-      // Marcar que el usuario ya bajó la página
-      if (window.scrollY > 50) hasScrolledAway.current = true;
-      // Si volvió al top después de haber bajado → reiniciar animación
-      if (hasScrolledAway.current && window.scrollY <= 5) reset();
-    };
-
-    window.addEventListener("wheel",      onWheel,      { passive: false });
-    window.addEventListener("scroll",     onScroll);
-    window.addEventListener("touchstart", onTouchStart, { passive: false });
-    window.addEventListener("touchmove",  onTouchMove,  { passive: false });
-
-    return () => {
-      window.removeEventListener("wheel",      onWheel);
-      window.removeEventListener("scroll",     onScroll);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove",  onTouchMove);
-    };
-  }, [isMobile, touchStart]);
+    rafRef.current = requestAnimationFrame(tick);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, []);
 
   // How far each half slides (in vw)
   const slide = progress * (isMobile ? 22 : 30);
-  // Subtitle/badge fade in once content is shown
   const contentOpacity = showContent ? 1 : 0;
 
   return (
@@ -128,7 +60,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative w-full flex flex-col items-center justify-center min-h-screen px-4">
 
-        {/* Badge — fades out as curtain opens */}
+        {/* Badge */}
         <p
           className="text-blue-glow text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-6 text-center"
           style={{ opacity: Math.max(0, 1 - progress * 2.5), transition: "none" }}
@@ -151,14 +83,6 @@ const HeroSection = () => {
             {RIGHT_TEXT}
           </h1>
         </div>
-
-        {/* Scroll hint — fades out as user scrolls */}
-        <p
-          className="text-primary-foreground/50 text-xs tracking-widest uppercase mt-8"
-          style={{ opacity: Math.max(0, 1 - progress * 3), transition: "none" }}
-        >
-          ↓ Scrolleá para descubrir
-        </p>
 
         {/* Subtitle + buttons — appear once fully open */}
         <div
