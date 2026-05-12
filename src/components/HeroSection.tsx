@@ -1,59 +1,56 @@
-import { useRef } from "react"
-import { useAnimationFrame } from "motion/react"
+import { useEffect, useRef, useState } from "react"
+import { motion } from "motion/react"
 import heroBg from "@/assets/hero-bg-new.jpg"
 import float1  from "@/assets/float-1.jpg"
 import float2  from "@/assets/float-2.jpg"
 import float3  from "@/assets/float-3.jpg"
 import float4  from "@/assets/float-4.jpg"
 import float5  from "@/assets/float-5.jpg"
-import { useMousePositionRef } from "@/hooks/use-mouse-position-ref"
 
-const PERIOD = 28 // segundos por vuelta completa
+/* ── 5 posiciones fijas en la sección ──────────────────────────── */
+const SLOTS = [
+  { top: "7%",  left: "2%"  },  // top-left
+  { top: "5%",  left: "63%" },  // top-right
+  { top: "34%", left: "1%"  },  // mid-left
+  { top: "64%", left: "2%"  },  // bottom-left
+  { top: "63%", left: "63%" },  // bottom-right
+]
 
-const photoDefs = [
-  { src: float1, cls: "w-80 md:w-[26rem] aspect-video",  phase: 0,                      depth: 1.0 },
-  { src: float2, cls: "w-80 md:w-[26rem] aspect-video",  phase: (2 * Math.PI) / 5,      depth: 1.4 },
-  { src: float3, cls: "w-72 md:w-96     aspect-video",   phase: (4 * Math.PI) / 5,      depth: 0.9 },
-  { src: float4, cls: "w-80 md:w-[26rem] aspect-video",  phase: (6 * Math.PI) / 5,      depth: 1.2 },
-  { src: float5, cls: "w-56 md:w-72     aspect-[3/4]",   phase: (8 * Math.PI) / 5,      depth: 1.0 },
+/* ── Definición de cada foto: src + tamaño + tiempo de bob ──────── */
+const PHOTOS = [
+  { src: float1, cls: "w-72 md:w-96 aspect-video",  bobDur: 5.2, bobDelay: 0   },
+  { src: float2, cls: "w-72 md:w-96 aspect-video",  bobDur: 6.0, bobDelay: 0.8 },
+  { src: float3, cls: "w-72 md:w-88 aspect-video",  bobDur: 4.8, bobDelay: 1.6 },
+  { src: float4, cls: "w-72 md:w-96 aspect-video",  bobDur: 5.6, bobDelay: 2.4 },
+  { src: float5, cls: "w-48 md:w-64 aspect-[3/4]",  bobDur: 4.4, bobDelay: 3.2 },
 ]
 
 const HeroSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const imgRefs      = useRef<(HTMLImageElement | null)[]>([])
-  const mousePos     = useMousePositionRef(containerRef)
+  // assignments[i] = índice de slot donde está la foto i
+  const [assignments, setAssignments] = useState([0, 1, 2, 3, 4])
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  useAnimationFrame((time) => {
-    if (!containerRef.current) return
-    const { width, height } = containerRef.current.getBoundingClientRect()
+  useEffect(() => {
+    const scheduleSwap = () => {
+      const delay = 2000 + Math.random() * 1500  // 2 – 3.5 s
 
-    // Ejes de la elipse: 28% ancho × 19% alto del contenedor
-    const Ax = width  * 0.28
-    const Ay = height * 0.19
+      timerRef.current = setTimeout(() => {
+        setAssignments((prev) => {
+          const next = [...prev]
+          // Elegir dos fotos distintas al azar
+          const a = Math.floor(Math.random() * 5)
+          let b = Math.floor(Math.random() * 4)
+          if (b >= a) b++
+          ;[next[a], next[b]] = [next[b], next[a]]
+          return next
+        })
+        scheduleSwap()
+      }, delay)
+    }
 
-    const t = (time / 1000 / PERIOD) * 2 * Math.PI
-
-    photoDefs.forEach((p, i) => {
-      const el = imgRefs.current[i]
-      if (!el) return
-
-      const angle = t + p.phase
-
-      // Órbita elíptica
-      const ox = Ax * Math.cos(angle)
-      const oy = Ay * Math.sin(angle)
-
-      // Bob suave encima de la órbita
-      const bob = 12 * Math.sin(t * 2.2 + p.phase)
-
-      // Parallax con el mouse
-      const mx = mousePos.current.x * p.depth * 0.025
-      const my = mousePos.current.y * p.depth * 0.025
-
-      // Centrar la foto en su punto orbital
-      el.style.transform = `translate(calc(-50% + ${ox + mx}px), calc(-50% + ${oy + bob + my}px))`
-    })
-  })
+    scheduleSwap()
+    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
+  }, [])
 
   return (
     <section
@@ -66,20 +63,31 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-hero opacity-85" />
       </div>
 
-      {/* Fotos orbitando — z-0 para ir DETRÁS del título */}
-      <div ref={containerRef} className="absolute inset-0 z-0">
-        {photoDefs.map((p, i) => (
-          <img
-            key={i}
-            ref={(el) => { imgRefs.current[i] = el }}
-            src={p.src}
-            alt=""
-            className={`absolute top-1/2 left-1/2 will-change-transform object-cover rounded-2xl shadow-2xl ring-1 ring-white/10 opacity-80 ${p.cls}`}
-          />
-        ))}
+      {/* Fotos — z-0, van DETRÁS del título cuando cruzan el centro */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {PHOTOS.map((photo, i) => {
+          const slot = SLOTS[assignments[i]]
+          return (
+            <motion.div
+              key={i}
+              className="absolute"
+              animate={{ top: slot.top, left: slot.left }}
+              transition={{ duration: 1.6, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <img
+                src={photo.src}
+                alt=""
+                className={`object-cover rounded-2xl shadow-2xl ring-1 ring-white/10 opacity-80 ${photo.cls}`}
+                style={{
+                  animation: `float-bob ${photo.bobDur}s ${photo.bobDelay}s ease-in-out infinite`,
+                }}
+              />
+            </motion.div>
+          )
+        })}
       </div>
 
-      {/* Main content — z-10 para ir DELANTE de las fotos */}
+      {/* Contenido principal — z-10, siempre delante */}
       <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-screen px-4 text-center">
         <p className="text-blue-glow text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-6">
           Innovare S.A. — Consultoría Ecosistémica
