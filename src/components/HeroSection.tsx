@@ -2,6 +2,8 @@ import heroBg   from "@/assets/hero-bg-new.jpg"
 import float1   from "@/assets/float-1.jpg"
 import float2   from "@/assets/float-2.jpg"
 import float3   from "@/assets/float-3.jpg"
+import float4   from "@/assets/float-4.jpg"
+import float5   from "@/assets/float-5.jpg"
 import Floating, { FloatingElement } from "@/components/Floating"
 
 const HeroSection = () => {
@@ -18,30 +20,48 @@ const HeroSection = () => {
 
       {/* Floating photo elements */}
       <Floating sensitivity={1} easingFactor={0.04}>
-        {/* Imagen 1 — superior izquierda */}
-        <FloatingElement depth={1.5} className="top-[8%] left-[3%]">
+        {/* 1 — superior izquierda */}
+        <FloatingElement depth={1.5} className="top-[5%] left-[1%]">
           <img
             src={float1}
             alt=""
-            className="w-48 md:w-64 aspect-video object-cover rounded-xl shadow-2xl opacity-80 ring-1 ring-white/10"
+            className="w-64 md:w-80 aspect-video object-cover rounded-xl shadow-2xl opacity-80 ring-1 ring-white/10"
           />
         </FloatingElement>
 
-        {/* Imagen 2 — superior derecha */}
-        <FloatingElement depth={2.5} className="top-[5%] right-[4%]">
+        {/* 2 — superior derecha */}
+        <FloatingElement depth={2.5} className="top-[4%] right-[1%]">
           <img
             src={float2}
             alt=""
-            className="w-44 md:w-60 aspect-video object-cover rounded-xl shadow-2xl opacity-75 ring-1 ring-white/10"
+            className="w-60 md:w-80 aspect-video object-cover rounded-xl shadow-2xl opacity-75 ring-1 ring-white/10"
           />
         </FloatingElement>
 
-        {/* Imagen 3 — inferior derecha */}
-        <FloatingElement depth={1} className="bottom-[12%] right-[5%]">
+        {/* 3 — inferior derecha */}
+        <FloatingElement depth={1} className="bottom-[8%] right-[1%]">
           <img
             src={float3}
             alt=""
-            className="w-48 md:w-72 aspect-video object-cover rounded-xl shadow-2xl opacity-70 ring-1 ring-white/10"
+            className="w-64 md:w-88 aspect-video object-cover rounded-xl shadow-2xl opacity-70 ring-1 ring-white/10"
+          />
+        </FloatingElement>
+
+        {/* 4 — inferior izquierda */}
+        <FloatingElement depth={2} className="bottom-[8%] left-[1%]">
+          <img
+            src={float4}
+            alt=""
+            className="w-60 md:w-80 aspect-video object-cover rounded-xl shadow-2xl opacity-75 ring-1 ring-white/10"
+          />
+        </FloatingElement>
+
+        {/* 5 — centro izquierda */}
+        <FloatingElement depth={1.8} className="top-[38%] left-[0%] -translate-y-1/2">
+          <img
+            src={float5}
+            alt=""
+            className="w-48 md:w-64 aspect-[3/4] object-cover rounded-xl shadow-2xl opacity-70 ring-1 ring-white/10"
           />
         </FloatingElement>
       </Floating>
