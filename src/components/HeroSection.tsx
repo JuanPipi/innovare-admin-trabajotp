@@ -1,4 +1,7 @@
-import heroBg from "@/assets/amazonas-bg.webp"
+import heroBg   from "@/assets/hero-bg-new.jpg"
+import float1   from "@/assets/float-1.jpg"
+import float2   from "@/assets/float-2.jpg"
+import float3   from "@/assets/float-3.jpg"
 import Floating, { FloatingElement } from "@/components/Floating"
 
 const HeroSection = () => {
@@ -13,45 +16,37 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-hero opacity-85" />
       </div>
 
-      {/* Floating decorative elements */}
+      {/* Floating photo elements */}
       <Floating sensitivity={1} easingFactor={0.04}>
-        {/* Orbe grande — fondo, se mueve poco */}
-        <FloatingElement depth={0.5} className="top-[10%] left-[5%]">
-          <div className="w-64 h-64 rounded-full bg-emerald-500/10 blur-3xl" />
+        {/* Imagen 1 — superior izquierda */}
+        <FloatingElement depth={1.5} className="top-[8%] left-[3%]">
+          <img
+            src={float1}
+            alt=""
+            className="w-48 md:w-64 aspect-video object-cover rounded-xl shadow-2xl opacity-80 ring-1 ring-white/10"
+          />
         </FloatingElement>
 
-        {/* Orbe azul medio */}
-        <FloatingElement depth={1.5} className="top-[20%] right-[8%]">
-          <div className="w-40 h-40 rounded-full bg-blue-400/15 blur-2xl" />
+        {/* Imagen 2 — superior derecha */}
+        <FloatingElement depth={2.5} className="top-[5%] right-[4%]">
+          <img
+            src={float2}
+            alt=""
+            className="w-44 md:w-60 aspect-video object-cover rounded-xl shadow-2xl opacity-75 ring-1 ring-white/10"
+          />
         </FloatingElement>
 
-        {/* Anillo decorativo */}
-        <FloatingElement depth={2} className="bottom-[25%] left-[10%]">
-          <div className="w-24 h-24 rounded-full border border-emerald-400/20" />
-        </FloatingElement>
-
-        {/* Punto brillante */}
-        <FloatingElement depth={3} className="top-[35%] left-[20%]">
-          <div className="w-3 h-3 rounded-full bg-emerald-300/60 shadow-[0_0_12px_3px_rgba(110,231,183,0.4)]" />
-        </FloatingElement>
-
-        {/* Punto azul */}
-        <FloatingElement depth={2.5} className="top-[55%] right-[18%]">
-          <div className="w-2 h-2 rounded-full bg-blue-300/70 shadow-[0_0_10px_3px_rgba(147,197,253,0.4)]" />
-        </FloatingElement>
-
-        {/* Línea diagonal sutil */}
-        <FloatingElement depth={1} className="bottom-[30%] right-[12%]">
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-emerald-400/30 to-transparent rotate-45" />
-        </FloatingElement>
-
-        {/* Orbe verde pequeño */}
-        <FloatingElement depth={2} className="top-[65%] left-[30%]">
-          <div className="w-16 h-16 rounded-full bg-emerald-400/10 blur-xl" />
+        {/* Imagen 3 — inferior derecha */}
+        <FloatingElement depth={1} className="bottom-[12%] right-[5%]">
+          <img
+            src={float3}
+            alt=""
+            className="w-48 md:w-72 aspect-video object-cover rounded-xl shadow-2xl opacity-70 ring-1 ring-white/10"
+          />
         </FloatingElement>
       </Floating>
 
-      {/* Main content — estático, centrado */}
+      {/* Main content */}
       <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-screen px-4 text-center">
         <p className="text-blue-glow text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-6">
           Innovare S.A. — Consultoría Ecosistémica
