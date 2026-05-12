@@ -1,95 +1,85 @@
-import { useEffect, useRef, useState } from "react"
-import { motion } from "motion/react"
-import heroBg from "@/assets/hero-bg-new.jpg"
+import { useEffect, useState } from "react"
+import heroBg  from "@/assets/hero-bg-new.jpg"
 import float1  from "@/assets/float-1.jpg"
 import float2  from "@/assets/float-2.jpg"
 import float3  from "@/assets/float-3.jpg"
 import float4  from "@/assets/float-4.jpg"
 import float5  from "@/assets/float-5.jpg"
 
-/* ── 5 posiciones fijas en la sección ──────────────────────────── */
-// Las posiciones derechas usan right-safe: foto ancho ~280px → left máx ≈ 58% en 768px
-const SLOTS = [
-  { top: "7%",  left: "2%"  },  // top-left
-  { top: "5%",  left: "58%" },  // top-right
-  { top: "34%", left: "1%"  },  // mid-left
-  { top: "63%", left: "2%"  },  // bottom-left
-  { top: "62%", left: "58%" },  // bottom-right
-]
-
-/* ── Definición de cada foto: src + tamaño + tiempo de bob ──────── */
-const PHOTOS = [
-  { src: float1, cls: "w-64 md:w-80 aspect-video",  bobDur: 5.2, bobDelay: 0   },
-  { src: float2, cls: "w-64 md:w-80 aspect-video",  bobDur: 6.0, bobDelay: 0.8 },
-  { src: float3, cls: "w-64 md:w-80 aspect-video",  bobDur: 4.8, bobDelay: 1.6 },
-  { src: float4, cls: "w-64 md:w-80 aspect-video",  bobDur: 5.6, bobDelay: 2.4 },
-  { src: float5, cls: "w-40 md:w-56 aspect-[3/4]",  bobDur: 4.4, bobDelay: 3.2 },
-]
+const SLIDES = [heroBg, float1, float2, float3, float4, float5]
+const INTERVAL = 5000 // ms entre slides
 
 const HeroSection = () => {
-  // assignments[i] = índice de slot donde está la foto i
-  const [assignments, setAssignments] = useState([0, 1, 2, 3, 4])
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [current, setCurrent] = useState(0)
+  const [prev, setPrev]       = useState<number | null>(null)
+  const [fading, setFading]   = useState(false)
 
   useEffect(() => {
-    const scheduleSwap = () => {
-      const delay = 2000 + Math.random() * 1500  // 2 – 3.5 s
-
-      timerRef.current = setTimeout(() => {
-        setAssignments((prev) => {
-          const next = [...prev]
-          // Elegir dos fotos distintas al azar
-          const a = Math.floor(Math.random() * 5)
-          let b = Math.floor(Math.random() * 4)
-          if (b >= a) b++
-          ;[next[a], next[b]] = [next[b], next[a]]
-          return next
-        })
-        scheduleSwap()
-      }, delay)
-    }
-
-    scheduleSwap()
-    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
+    const timer = setInterval(() => {
+      setCurrent((c) => {
+        const next = (c + 1) % SLIDES.length
+        setPrev(c)
+        setFading(true)
+        return next
+      })
+    }, INTERVAL)
+    return () => clearInterval(timer)
   }, [])
+
+  // Una vez termina la transición, limpiamos el prev
+  useEffect(() => {
+    if (!fading) return
+    const t = setTimeout(() => {
+      setPrev(null)
+      setFading(false)
+    }, 1000)
+    return () => clearTimeout(t)
+  }, [fading, current])
 
   return (
     <section
       id="inicio"
       className="relative min-h-screen flex items-center overflow-hidden"
     >
-      {/* Background */}
+      {/* Carrusel de fondo */}
       <div className="absolute inset-0">
-        <img src={heroBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-hero opacity-85" />
+        {/* Slide saliente — se queda quieto mientras el nuevo aparece encima */}
+        {prev !== null && (
+          <img
+            key={`prev-${prev}`}
+            src={SLIDES[prev]}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+        {/* Slide entrante — hace fade-in */}
+        <img
+          key={`curr-${current}`}
+          src={SLIDES[current]}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            animation: "hero-fade-in 1s ease forwards",
+          }}
+        />
+        {/* Overlay oscuro */}
+        <div className="absolute inset-0 bg-hero opacity-80" />
       </div>
 
-      {/* Fotos — z-0, van DETRÁS del título cuando cruzan el centro */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {PHOTOS.map((photo, i) => {
-          const slot = SLOTS[assignments[i]]
-          return (
-            <motion.div
-              key={i}                                   // key fijo = sin re-mount
-              className="absolute"
-              initial={{ top: SLOTS[i].top, left: SLOTS[i].left }}
-              animate={{ top: slot.top, left: slot.left }}
-              transition={{ duration: 1.6, ease: [0.4, 0, 0.2, 1] }}
-            >
-              <img
-                src={photo.src}
-                alt=""
-                className={`object-cover rounded-2xl shadow-2xl ring-1 ring-white/10 opacity-80 ${photo.cls}`}
-                style={{
-                  animation: `float-bob ${photo.bobDur}s ${photo.bobDelay}s ease-in-out infinite`,
-                }}
-              />
-            </motion.div>
-          )
-        })}
+      {/* Indicadores */}
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => { setPrev(current); setCurrent(i); setFading(true) }}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              i === current ? "bg-white w-6" : "bg-white/40"
+            }`}
+          />
+        ))}
       </div>
 
-      {/* Contenido principal — z-10, siempre delante */}
+      {/* Contenido principal */}
       <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-screen px-4 text-center">
         <p className="text-blue-glow text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-6">
           Innovare S.A. — Consultoría Ecosistémica
