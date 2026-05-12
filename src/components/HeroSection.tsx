@@ -8,21 +8,22 @@ import float4  from "@/assets/float-4.jpg"
 import float5  from "@/assets/float-5.jpg"
 
 /* ── 5 posiciones fijas en la sección ──────────────────────────── */
+// Las posiciones derechas usan right-safe: foto ancho ~280px → left máx ≈ 58% en 768px
 const SLOTS = [
   { top: "7%",  left: "2%"  },  // top-left
-  { top: "5%",  left: "63%" },  // top-right
+  { top: "5%",  left: "58%" },  // top-right
   { top: "34%", left: "1%"  },  // mid-left
-  { top: "64%", left: "2%"  },  // bottom-left
-  { top: "63%", left: "63%" },  // bottom-right
+  { top: "63%", left: "2%"  },  // bottom-left
+  { top: "62%", left: "58%" },  // bottom-right
 ]
 
 /* ── Definición de cada foto: src + tamaño + tiempo de bob ──────── */
 const PHOTOS = [
-  { src: float1, cls: "w-72 md:w-96 aspect-video",  bobDur: 5.2, bobDelay: 0   },
-  { src: float2, cls: "w-72 md:w-96 aspect-video",  bobDur: 6.0, bobDelay: 0.8 },
-  { src: float3, cls: "w-72 md:w-88 aspect-video",  bobDur: 4.8, bobDelay: 1.6 },
-  { src: float4, cls: "w-72 md:w-96 aspect-video",  bobDur: 5.6, bobDelay: 2.4 },
-  { src: float5, cls: "w-48 md:w-64 aspect-[3/4]",  bobDur: 4.4, bobDelay: 3.2 },
+  { src: float1, cls: "w-64 md:w-80 aspect-video",  bobDur: 5.2, bobDelay: 0   },
+  { src: float2, cls: "w-64 md:w-80 aspect-video",  bobDur: 6.0, bobDelay: 0.8 },
+  { src: float3, cls: "w-64 md:w-80 aspect-video",  bobDur: 4.8, bobDelay: 1.6 },
+  { src: float4, cls: "w-64 md:w-80 aspect-video",  bobDur: 5.6, bobDelay: 2.4 },
+  { src: float5, cls: "w-40 md:w-56 aspect-[3/4]",  bobDur: 4.4, bobDelay: 3.2 },
 ]
 
 const HeroSection = () => {
@@ -64,13 +65,14 @@ const HeroSection = () => {
       </div>
 
       {/* Fotos — z-0, van DETRÁS del título cuando cruzan el centro */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {PHOTOS.map((photo, i) => {
           const slot = SLOTS[assignments[i]]
           return (
             <motion.div
-              key={i}
+              key={i}                                   // key fijo = sin re-mount
               className="absolute"
+              initial={{ top: SLOTS[i].top, left: SLOTS[i].left }}
               animate={{ top: slot.top, left: slot.left }}
               transition={{ duration: 1.6, ease: [0.4, 0, 0.2, 1] }}
             >
